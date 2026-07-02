@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Movie Maker Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Movie Maker Studio">
+          <span class="brand-mark">∞</span>
+          <span>Movie Maker</span>
+        </a>
+        <nav class="nav" aria-label="주요 메뉴">
+          <a href="#">Explore</a>
+          <a href="#">Image</a>
+          <a class="active" href="#">Video</a>
+          <a href="#">Audio</a>
+          <a href="#">Cinema Studio</a>
+          <a href="#">Assets</a>
+        </nav>
+        <div class="top-actions">
+          <button class="icon-button" type="button" aria-label="검색">⌕</button>
+          <button class="pricing-button" type="button">Pricing</button>
+          <button class="avatar-button" type="button" aria-label="계정"></button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <aside class="sidebar" aria-label="영상 생성 설정">
+          <div class="side-tabs" role="tablist" aria-label="작업 모드">
+            <button class="active" type="button">Create Video</button>
+            <button type="button">Edit Video</button>
+            <button type="button">Motion</button>
+          </div>
+
+          <section class="preset-hero" aria-label="선택 모델">
+            <button class="change-button" type="button">Change</button>
+            <div>
+              <strong>GENERAL</strong>
+              <span>Sora 2</span>
+            </div>
+          </section>
+
+          <label class="dropzone" id="dropzone">
+            <input id="imageInput" type="file" accept="image/*" />
+            <span class="upload-icon">▧</span>
+            <span class="drop-main">이미지 업로드</span>
+            <span class="drop-sub">PNG, JPG 또는 클립보드 붙여넣기</span>
+          </label>
+
+          <label class="field">
+            <span>Prompt</span>
+            <textarea id="promptInput" rows="5" placeholder="만들 장면을 적어주세요. 예: 네온 도시를 달리는 자동차, 빠른 패닝, 시네마틱 조명"></textarea>
+          </label>
+
+          <div class="field-row">
+            <label class="select-field">
+              <span>Model</span>
+              <select id="modelSelect">
+                <option>Sora 2</option>
+                <option>Kling 3.0</option>
+                <option>Runway Style</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="settings-grid" aria-label="렌더 설정">
+            <button class="setting-button active" type="button" data-duration="6">◷ 6s</button>
+            <button class="setting-button" type="button" data-duration="12">◷ 12s</button>
+            <button class="setting-button active" type="button" data-aspect="16:9">▭ 16:9</button>
+            <button class="setting-button" type="button" data-aspect="9:16">▯ 9:16</button>
+          </div>
+
+          <button class="generate-button" id="generateButton" type="button">
+            <span>Generate</span>
+            <strong>✦ 29</strong>
+          </button>
+
+          <p class="status-text" id="statusText">이미지를 올리거나 프롬프트로 샘플을 만든 뒤 생성할 수 있습니다.</p>
+        </aside>
+
+        <main class="main">
+          <div class="promo">
+            <span class="promo-chip">GO UNLIMITED</span>
+            <strong>Unlimited Video Studio</strong>
+            <span>프리셋 모션과 빠른 렌더링</span>
+            <button type="button">Get Unlimited ↗</button>
+          </div>
+
+          <section class="studio">
+            <div class="studio-header">
+              <div>
+                <p class="eyebrow">AI VIDEO WORKSPACE</p>
+                <h1>MAKE VIDEOS IN ONE CLICK</h1>
+              </div>
+              <div class="header-actions">
+                <button id="sampleButton" class="secondary-button" type="button">샘플 이미지</button>
+                <button id="clearButton" class="ghost-button" type="button">초기화</button>
+              </div>
+            </div>
+
+            <div class="stage-grid">
+              <section class="panel stage-panel" aria-label="이미지 스테이지">
+                <div class="panel-title">
+                  <span>ADD IMAGE</span>
+                  <small id="imageMeta">대기 중</small>
+                </div>
+                <div class="canvas-wrap" id="canvasWrap">
+                  <canvas id="previewCanvas" width="1280" height="720"></canvas>
+                  <div class="empty-state" id="emptyState">
+                    <span>▧</span>
+                    <strong>UPLOAD IMAGE</strong>
+                    <small>or create a sample from prompt</small>
+                  </div>
+                </div>
+              </section>
+
+              <section class="panel preset-panel" aria-label="모션 프리셋">
+                <div class="panel-title">
+                  <span>CHOOSE PRESET</span>
+                  <small id="presetName">Cinematic Drift</small>
+                </div>
+                <div class="preset-list" id="presetList">
+                  <button class="preset-card active" type="button" data-preset="drift">
+                    <span class="preset-thumb thumb-drift"></span>
+                    <strong>Cinematic Drift</strong>
+                    <small>slow push</small>
+                  </button>
+                  <button class="preset-card" type="button" data-preset="speed">
+                    <span class="preset-thumb thumb-speed"></span>
+                    <strong>Speed Ramp</strong>
+                    <small>fast pan</small>
+                  </button>
+                  <button class="preset-card" type="button" data-preset="orbit">
+                    <span class="preset-thumb thumb-orbit"></span>
+                    <strong>Soft Orbit</strong>
+                    <small>parallax</small>
+                  </button>
+                  <button class="preset-card" type="button" data-preset="zoom">
+                    <span class="preset-thumb thumb-zoom"></span>
+                    <strong>Impact Zoom</strong>
+                    <small>punch in</small>
+                  </button>
+                </div>
+              </section>
+
+              <section class="panel result-panel" aria-label="생성 결과">
+                <div class="panel-title">
+                  <span>GET VIDEO</span>
+                  <small id="renderMeta">미생성</small>
+                </div>
+                <div class="result-frame">
+                  <video id="resultVideo" controls playsinline></video>
+                  <div class="result-placeholder" id="resultPlaceholder">
+                    <span>▶</span>
+                    <strong>READY</strong>
+                  </div>
+                </div>
+                <div class="result-actions">
+                  <a class="download-link disabled" id="downloadLink" href="#" download="movie-maker-render.webm">Download</a>
+                  <button class="secondary-button" id="previewMotionButton" type="button">Preview Motion</button>
+                </div>
+              </section>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
