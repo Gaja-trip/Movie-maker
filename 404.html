@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Movie Maker Studio</title>
+    <script>
+      const projectBase = "/Movie-maker/";
+      const path = window.location.pathname;
+      const target = path === "/Movie-maker" || path.startsWith(projectBase) ? projectBase : "/";
+      window.location.replace(target);
+    </script>
+  </head>
+  <body>
+    <p>Movie Maker Studio로 이동 중입니다.</p>
+    <p><a href="/Movie-maker/">홈으로 이동</a></p>
+  </body>
+</html>
