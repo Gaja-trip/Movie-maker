@@ -6,4 +6,6 @@ Cinema production web prototype.
 
 Open `index.html` in a browser.
 
-Upload an image, choose a motion preset, then press `Generate` to create a short `.webm` video that can be previewed and downloaded.
+Upload an image and enter a prompt. The page automatically chooses a motion style from the prompt, renders a short `.webm` video, and enables preview/download.
+
+`Generate` is still available if you want to render again manually.
